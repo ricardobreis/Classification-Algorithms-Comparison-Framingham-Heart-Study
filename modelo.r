@@ -112,6 +112,7 @@ summary(glm.step)
 glm.prob.train <- predict(glm.step,type = "response")
 
 glm.prob.test <- predict(glm.step, newdata = data.test, type= "response")
+#length(glm.prob.train)
 
 # Verificando a aderência do ajuste logístico
 library(rms)
@@ -124,6 +125,13 @@ hist(glm.prob.test, breaks = 25, col = "lightblue",xlab= "Probabilidades",
 
 boxplot(glm.prob.test ~ data.test$TenYearCHD,col= c("red", "green"), horizontal= T)
 
+#guardando o histograma
+hist <- hist(glm.prob.test, breaks= 20, probability= T, ylim= c(0,5))
+score_1 <- density(base_sem_mv$TenYearCHD[base_sem_mv$TenYearCHD == 1], na.rm = T)
+score_0 <- density(base_sem_mv$TenYearCHD[base_sem_mv$TenYearCHD == 0], na.rm = T)
+lines(score_1,col = 'red')
+lines(score_0,col = 'blue')
+
 ################################################################################################
 # AVALIANDO A PERFORMANCE
 
@@ -135,6 +143,8 @@ glm.test  <- HMeasure(data.test$TenYearCHD, glm.prob.test)
 summary(glm.train)
 summary(glm.test)
 
+glm.train$metrics
+glm.test$metrics
 
 library(pROC)
 roc1 <- roc(data.test$TenYearCHD,glm.prob.test)
@@ -145,6 +155,23 @@ plot(x1,y1, type="n",
      xlab = "1 - Especificidade", 
      ylab= "Sensitividade")
 lines(x1, y1,lwd=3,lty=1, col="purple") 
+abline(0,1, lty=2)
+
+################################################################################################
+################################################################################################
+
+
+################################################################################################
+# MATRIZ DE CONFUSAO
+
+observado <- as.factor(data.test$TenYearCHD)
+modelado  <- as.factor(ifelse(glm.prob.test >= 0.2, 1.0, 0.0))
+
+library(gmodels)
+CrossTable(observado, modelado, prop.c= F, prop.t= F, prop.chisq= F)
+
+library(caret)
+confusionMatrix(modelado,observado, positive = "1")
 
 ################################################################################################
 ################################################################################################
