@@ -11,16 +11,16 @@
 # currentSmoker: 0 = nonsmoker; 1 = smoker
 # cigsPerDay: number of cigarettes smoked per day (estimated average)
 # BPMeds: 0 = Not on Blood Pressure medications; 1 = Is on Blood Pressure medications
-# prevalentStroke
-# prevalentHyp
+# prevalentStroke: AVC
+# prevalentHyp: Hipertensão
 # diabetes: 0 = No; 1 = Yes
-# totChol: mg/dL
-# sysBP: mmHg
-# diaBP: mmHg
+# totChol: Colesterol total mg/dL
+# sysBP: Pressão sistólica mmHg
+# diaBP: Pressão diastólica mmHg
 # BMI: Body Mass Index calculated as: Weight (kg) / Height(meter-squared)
 # heartRate: Beats/Min (Ventricular)
-# glucose: mg/dL
-# TenYearCHD
+# glucose: Glicemia mg/dL
+# TenYearCHD: Prever se o paciente vai ter doenças coronarianas em 10 anos
 #
 ################################################################################################
 # LENDO OS DADOS
