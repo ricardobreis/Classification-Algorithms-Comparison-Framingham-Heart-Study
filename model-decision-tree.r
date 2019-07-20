@@ -26,81 +26,81 @@
 # LENDO OS DADOS
 path <- "C:/Users/Ricardo/Documents/R-Projetos/FraminghamHeartStudy/"
 
-base <- read.csv(paste(path,"framingham.csv",sep=""), 
+baseAD <- read.csv(paste(path,"framingham.csv",sep=""), 
                  sep=",",header = T,stringsAsFactors = T)
 
 ################################################################################################
 # ANALISANDO AS VARIÁVEIS DA BASE DE DADOS
 # ANALISE UNIVARIADA
-summary(base)
+summary(baseAD)
 
 # Checando Missing Values
 library("VIM")
-matrixplot(base)
-aggr(base)
+matrixplot(baseAD)
+aggr(baseAD)
 
 #Estratégia Adotada:
 #Excluindo linhas com Missing Values
-index_glucose     <- which(is.na(base$glucose))
-index_heartRate   <- which(is.na(base$heartRate))
-index_BMI         <- which(is.na(base$BMI))
-index_totChol     <- which(is.na(base$totChol))
-index_BPMeds      <- which(is.na(base$BPMeds))
-index_cigsPerDay  <- which(is.na(base$cigsPerDay))
-index_education   <- which(is.na(base$education))
+index_glucose     <- which(is.na(baseAD$glucose))
+index_heartRate   <- which(is.na(baseAD$heartRate))
+index_BMI         <- which(is.na(baseAD$BMI))
+index_totChol     <- which(is.na(baseAD$totChol))
+index_BPMeds      <- which(is.na(baseAD$BPMeds))
+index_cigsPerDay  <- which(is.na(baseAD$cigsPerDay))
+index_education   <- which(is.na(baseAD$education))
 
-base_sem_mv <- base[-c(index_glucose,index_heartRate,index_BMI,index_totChol,index_BPMeds,index_cigsPerDay,index_education),]
-matrixplot(base_sem_mv)
-aggr(base_sem_mv)
+baseAD_sem_mv <- baseAD[-c(index_glucose,index_heartRate,index_BMI,index_totChol,index_BPMeds,index_cigsPerDay,index_education),]
+matrixplot(baseAD_sem_mv)
+aggr(baseAD_sem_mv)
 
 # ANALISE BIVARIADA
 # Variáveis quantitativas 
-boxplot(base_sem_mv$male            ~ base_sem_mv$TenYearCHD)
-boxplot(base_sem_mv$age             ~ base_sem_mv$TenYearCHD)
-boxplot(base_sem_mv$education       ~ base_sem_mv$TenYearCHD)
-boxplot(base_sem_mv$currentSmoker   ~ base_sem_mv$TenYearCHD)
-boxplot(base_sem_mv$cigsPerDay      ~ base_sem_mv$TenYearCHD)
-boxplot(base_sem_mv$BPMeds          ~ base_sem_mv$TenYearCHD)
-boxplot(base_sem_mv$prevalentStroke ~ base_sem_mv$TenYearCHD)
-boxplot(base_sem_mv$prevalentHyp    ~ base_sem_mv$TenYearCHD)
-boxplot(base_sem_mv$diabetes        ~ base_sem_mv$TenYearCHD)
-boxplot(base_sem_mv$totChol         ~ base_sem_mv$TenYearCHD)
-boxplot(base_sem_mv$sysBP           ~ base_sem_mv$TenYearCHD)
-boxplot(base_sem_mv$diaBP           ~ base_sem_mv$TenYearCHD)
-boxplot(base_sem_mv$BMI             ~ base_sem_mv$TenYearCHD)
-boxplot(base_sem_mv$heartRate       ~ base_sem_mv$TenYearCHD)
-boxplot(base_sem_mv$glucose         ~ base_sem_mv$TenYearCHD)
+boxplot(baseAD_sem_mv$male            ~ baseAD_sem_mv$TenYearCHD)
+boxplot(baseAD_sem_mv$age             ~ baseAD_sem_mv$TenYearCHD)
+boxplot(baseAD_sem_mv$education       ~ baseAD_sem_mv$TenYearCHD)
+boxplot(baseAD_sem_mv$currentSmoker   ~ baseAD_sem_mv$TenYearCHD)
+boxplot(baseAD_sem_mv$cigsPerDay      ~ baseAD_sem_mv$TenYearCHD)
+boxplot(baseAD_sem_mv$BPMeds          ~ baseAD_sem_mv$TenYearCHD)
+boxplot(baseAD_sem_mv$prevalentStroke ~ baseAD_sem_mv$TenYearCHD)
+boxplot(baseAD_sem_mv$prevalentHyp    ~ baseAD_sem_mv$TenYearCHD)
+boxplot(baseAD_sem_mv$diabetes        ~ baseAD_sem_mv$TenYearCHD)
+boxplot(baseAD_sem_mv$totChol         ~ baseAD_sem_mv$TenYearCHD)
+boxplot(baseAD_sem_mv$sysBP           ~ baseAD_sem_mv$TenYearCHD)
+boxplot(baseAD_sem_mv$diaBP           ~ baseAD_sem_mv$TenYearCHD)
+boxplot(baseAD_sem_mv$BMI             ~ baseAD_sem_mv$TenYearCHD)
+boxplot(baseAD_sem_mv$heartRate       ~ baseAD_sem_mv$TenYearCHD)
+boxplot(baseAD_sem_mv$glucose         ~ baseAD_sem_mv$TenYearCHD)
 
 #Variáveis quantitativas e quali
-prop.table(table(base_sem_mv$TenYearCHD))
-prop.table(table(base_sem_mv$male,       base_sem_mv$TenYearCHD),1)
-prop.table(table(base_sem_mv$age,   base_sem_mv$TenYearCHD),1)
-prop.table(table(base_sem_mv$education, base_sem_mv$TenYearCHD),1)
-prop.table(table(base_sem_mv$currentSmoker,   base_sem_mv$TenYearCHD),1)
-prop.table(table(base_sem_mv$cigsPerDay,   base_sem_mv$TenYearCHD),1)
-prop.table(table(base_sem_mv$BPMeds,      base_sem_mv$TenYearCHD),1)
-prop.table(table(base_sem_mv$prevalentStroke,   base_sem_mv$TenYearCHD),1)
-prop.table(table(base_sem_mv$prevalentHyp,     base_sem_mv$TenYearCHD),1)
-prop.table(table(base_sem_mv$diabetes,  base_sem_mv$TenYearCHD),1)
-prop.table(table(base_sem_mv$totChol, base_sem_mv$TenYearCHD),1)
-prop.table(table(base_sem_mv$sysBP, base_sem_mv$TenYearCHD),1)
-prop.table(table(base_sem_mv$diaBP, base_sem_mv$TenYearCHD),1)
-prop.table(table(base_sem_mv$BMI, base_sem_mv$TenYearCHD),1)
-prop.table(table(base_sem_mv$heartRate, base_sem_mv$TenYearCHD),1)
-prop.table(table(base_sem_mv$glucose, base_sem_mv$TenYearCHD),1)
+prop.table(table(baseAD_sem_mv$TenYearCHD))
+prop.table(table(baseAD_sem_mv$male,       baseAD_sem_mv$TenYearCHD),1)
+prop.table(table(baseAD_sem_mv$age,   baseAD_sem_mv$TenYearCHD),1)
+prop.table(table(baseAD_sem_mv$education, baseAD_sem_mv$TenYearCHD),1)
+prop.table(table(baseAD_sem_mv$currentSmoker,   baseAD_sem_mv$TenYearCHD),1)
+prop.table(table(baseAD_sem_mv$cigsPerDay,   baseAD_sem_mv$TenYearCHD),1)
+prop.table(table(baseAD_sem_mv$BPMeds,      baseAD_sem_mv$TenYearCHD),1)
+prop.table(table(baseAD_sem_mv$prevalentStroke,   baseAD_sem_mv$TenYearCHD),1)
+prop.table(table(baseAD_sem_mv$prevalentHyp,     baseAD_sem_mv$TenYearCHD),1)
+prop.table(table(baseAD_sem_mv$diabetes,  baseAD_sem_mv$TenYearCHD),1)
+prop.table(table(baseAD_sem_mv$totChol, baseAD_sem_mv$TenYearCHD),1)
+prop.table(table(baseAD_sem_mv$sysBP, baseAD_sem_mv$TenYearCHD),1)
+prop.table(table(baseAD_sem_mv$diaBP, baseAD_sem_mv$TenYearCHD),1)
+prop.table(table(baseAD_sem_mv$BMI, baseAD_sem_mv$TenYearCHD),1)
+prop.table(table(baseAD_sem_mv$heartRate, baseAD_sem_mv$TenYearCHD),1)
+prop.table(table(baseAD_sem_mv$glucose, baseAD_sem_mv$TenYearCHD),1)
 
 ################################################################################################
 # AMOSTRAGEM DO DADOS
 library(caret)
 
 set.seed(12345)
-index <- createDataPartition(base_sem_mv$TenYearCHD, p= 0.7,list = F)
+index <- createDataPartition(baseAD_sem_mv$TenYearCHD, p= 0.7,list = F)
 
-data.train <- base_sem_mv[index, ] # base de desenvolvimento: 70%
-data.test  <- base_sem_mv[-index,] # base de teste: 30%
+data.train <- baseAD_sem_mv[index, ] # base de desenvolvimento: 70%
+data.test  <- baseAD_sem_mv[-index,] # base de teste: 30%
 
 # Checando se as proporções das amostras são próximas à base original
-prop.table(table(base_sem_mv$TenYearCHD))
+prop.table(table(baseAD_sem_mv$TenYearCHD))
 prop.table(table(data.train$TenYearCHD))
 prop.table(table(data.test$TenYearCHD))
 
@@ -176,14 +176,14 @@ tree.train$metrics
 tree.test$metrics
 
 library(pROC)
-roc1 <- roc(data.test$TenYearCHD,tree.prob.test)
-y1 <- roc1$sensitivities
-x1 <- 1-roc1$specificities
+roc2 <- roc(data.test$TenYearCHD,tree.prob.test)
+y2 <- roc2$sensitivities
+x2 <- 1-roc2$specificities
 
-plot(x1,y1, type="n",
+plot(x2,y2, type="n",
      xlab = "1 - Especificidade", 
      ylab= "Sensitividade")
-lines(x1, y1,lwd=3,lty=1, col="purple")
+lines(x2, y2,lwd=3,lty=1, col="purple")
 abline(0,1, lty=2)
 
 ################################################################################################
