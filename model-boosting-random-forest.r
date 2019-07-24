@@ -103,7 +103,7 @@ f_full <- as.formula(paste("TenYearCHD ~",
 library(randomForest)
 # Aqui come?amos a construir um modelo de random forest usando sqrt(n var) | mtry = default
 # Construimos 500 ?rvores, e permitimos n?s finais com no m?nimo 50 elementos
-rndfor <- randomForest(f_full,data= data.train,importance = T, nodesize =50, ntree = 500)
+rndfor <- randomForest(f_full,data= data.train,importance = T, nodesize =5, ntree = 500)
 rndfor
 
 # Avaliando a evolu??o do erro com o aumento do n?mero de ?rvores no ensemble
@@ -111,8 +111,11 @@ plot(rndfor, main= "Mensura??o do erro")
 legend("topright", c('Out-of-bag',"1","0"), lty=1, col=c("black","green","red"))
 
 # Uma avalia??o objetiva indica que a partir de ~30 ?rvores n?o mais ganhos expressivos
-rndfor2 <- randomForest(f_full,data= data.train,importance = T, nodesize =50, ntree = 30)
+rndfor2 <- randomForest(f_full,data= data.train,importance = T, nodesize =5, ntree = 50)
 rndfor2
+
+plot(rndfor2, main= "Mensura??o do erro")
+legend("topright", c('Out-of-bag',"1","0"), lty=1, col=c("black","green","red"))
 
 # Import?ncia das vari?veis
 varImpPlot(rndfor2, sort= T, main = "Import?ncia das Vari?veis")
@@ -132,9 +135,9 @@ boxplot(rndfor2.prob.test ~ data.test$TenYearCHD,col= c("green", "red"), horizon
 library(adabag)
 # Aqui construimos inicialmente um modelo boosting com 1000 itera??es, profundidade 1
 # e minbucket 50, os pesos das ?rvores ser? dado pelo algortimo de Freund
-boost <- boosting(f_full, data= data.train, mfinal= 12, 
+boost <- boosting(f_full, data= data.train, mfinal= 110, 
                   coeflearn = "Freund", 
-                  control = rpart.control(minbucket= 200,maxdepth = 1))
+                  control = rpart.control(minbucket= 5,maxdepth = 12))
 
 # Avaliando a evolu??o do erro conforme o n?mero de itera??es aumenta
 plot(errorevol(boost, data.train))
@@ -154,7 +157,7 @@ boost.prob.test  <- predict.boosting(boost, data.test)$prob[,2]
 hist(boost.prob.test, breaks = 25, col = "lightblue",xlab= "Probabilidades",
      ylab= "Frequ?ncia",main= "Boosting")
 
-boxplot(boost.prob.test ~ data.test$y_empleft,col= c("green", "red"), horizontal= T)
+boxplot(boost.prob.test ~ data.test$TenYearCHD,col= c("green", "red"), horizontal= T)
 
 ################################################################################################
 # AVALIANDO A PERFORMANCE
@@ -162,23 +165,22 @@ boxplot(boost.prob.test ~ data.test$y_empleft,col= c("green", "red"), horizontal
 # Matricas de discrimina??o para ambos modelos
 library(hmeasure) 
 
-rndfor.train  <- HMeasure(data.train$y_empleft,rndfor2.probtrain)
-rndfor.test  <- HMeasure(data.test$y_empleft,rndfor2.probtest)
-summary(rndfor.train)
-summary(rndfor.test)
+rndfor.train  <- HMeasure(data.train$TenYearCHD,rndfor2.prob.train)
+rndfor.test  <- HMeasure(data.test$TenYearCHD,rndfor2.prob.test)
+rndfor.train$metrics
+rndfor.test$metrics
 
-boost.train <- HMeasure(data.train$y_empleft,boost.prob.train)
-boost.test  <- HMeasure(data.test$y_empleft,boost.prob.test)
-summary(boost.train)
-summary(boost.test)
-
+boost.train <- HMeasure(data.train$TenYearCHD,boost.prob.train)
+boost.test  <- HMeasure(data.test$TenYearCHD,boost.prob.test)
+boost.train$metrics
+boost.test$metrics
 
 library(pROC)
 roc1 <- roc(data.test$TenYearCHD,rndfor2.prob.test)
 y1 <- roc1$sensitivities
 x1 <- 1-roc1$specificities
 
-roc2 <- roc(data.test$y_empleft,boost.prob.test)
+roc2 <- roc(data.test$TenYearCHD,boost.prob.test)
 y2 <- roc2$sensitivities
 x2 <- 1-roc2$specificities
 
