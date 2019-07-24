@@ -13,8 +13,8 @@ baseBRF <- read.csv(paste(path,"dataset-framingham-heart-study.csv",sep=""),
                  sep=",",header = T,stringsAsFactors = T)
 
 ################################################################################################
-# ANALISANDO AS VARIÁVEIS DA BASE DE DADOS
-# ANALISE UNIVARIADA
+# ANALISANDO AS VARiÁVEIS DA BASE DE DADOS
+# ANÁLISE UNIVARIADA
 summary(baseBRF)
 
 # Checando Missing Values
@@ -36,7 +36,7 @@ baseBRF_sem_mv <- baseBRF[-c(index_glucose,index_heartRate,index_BMI,index_totCh
 matrixplot(baseBRF_sem_mv)
 aggr(baseBRF_sem_mv)
 
-# ANALISE BIVARIADA
+# ANÁLISE BIVARIADA
 # Variáveis quantitativas 
 boxplot(baseBRF_sem_mv$male            ~ baseBRF_sem_mv$TenYearCHD)
 boxplot(baseBRF_sem_mv$age             ~ baseBRF_sem_mv$TenYearCHD)
@@ -87,38 +87,38 @@ prop.table(table(baseBRF_sem_mv$TenYearCHD))
 prop.table(table(data.train$TenYearCHD))
 prop.table(table(data.test$TenYearCHD))
 
-# Algoritmos de arvore necessitam que a variável resposta num problema de classificação seja 
+# Algoritmos de árvore necessitam que a variável resposta num problema de classificação seja 
 # um factor; convertendo aqui nas amostras de desenvolvimento e teste
 data.train$TenYearCHD <- as.factor(data.train$TenYearCHD)
 data.test$TenYearCHD  <- as.factor(data.test$TenYearCHD)
 
 ################################################################################################
-# MODELAGEM DOS DADOS - M?TODOS DE ENSEMBLE
+# MODELAGEM DOS DADOS - MÉTODOS DE ENSEMBLE
 
-names  <- names(data.train) # salva o nome de todas as vari?veis e escreve a f?rmula
+names  <- names(data.train) # salva o nome de todas as variáveis e escreve a fórmula
 f_full <- as.formula(paste("TenYearCHD ~",
                            paste(names[!names %in% "TenYearCHD"], collapse = " + ")))
 
 # a) Random Forest
 library(randomForest)
-# Aqui come?amos a construir um modelo de random forest usando sqrt(n var) | mtry = default
-# Construimos 500 ?rvores, e permitimos n?s finais com no m?nimo 50 elementos
+# Aqui começamos a construir um modelo de random forest usando sqrt(n var) | mtry = default
+# Construimos 500 árvores, e permitimos nós finais com no mínimo 50 elementos
 rndfor <- randomForest(f_full,data= data.train,importance = T, nodesize =5, ntree = 500)
 rndfor
 
-# Avaliando a evolu??o do erro com o aumento do n?mero de ?rvores no ensemble
-plot(rndfor, main= "Mensura??o do erro")
+# Avaliando a evolução do erro com o aumento do número de árvores no ensemble
+plot(rndfor, main= "Mensuração do erro")
 legend("topright", c('Out-of-bag',"1","0"), lty=1, col=c("black","green","red"))
 
-# Uma avalia??o objetiva indica que a partir de ~30 ?rvores n?o mais ganhos expressivos
+# Uma avaliação objetiva indica que a partir de ~30 árvores não há mais ganhos expressivos
 rndfor2 <- randomForest(f_full,data= data.train,importance = T, nodesize =5, ntree = 50)
 rndfor2
 
-plot(rndfor2, main= "Mensura??o do erro")
+plot(rndfor2, main= "Mensuração do erro")
 legend("topright", c('Out-of-bag',"1","0"), lty=1, col=c("black","green","red"))
 
-# Import?ncia das vari?veis
-varImpPlot(rndfor2, sort= T, main = "Import?ncia das Vari?veis")
+# Importância das variáveis
+varImpPlot(rndfor2, sort= T, main = "Importância das Variáveis")
 
 # Aplicando o modelo nas amostras  e determinando as probabilidades
 rndfor2.prob.train <- predict(rndfor2, type = "prob")[,2]
@@ -126,25 +126,25 @@ rndfor2.prob.test  <- predict(rndfor2,newdata = data.test, type = "prob")[,2]
 
 # Comportamento da saida do modelo
 hist(rndfor2.prob.test, breaks = 25, col = "lightblue",xlab= "Probabilidades",
-     ylab= "Frequ?ncia",main= "Random Forest")
+     ylab= "Frequência",main= "Random Forest")
 
 boxplot(rndfor2.prob.test ~ data.test$TenYearCHD,col= c("green", "red"), horizontal= T)
 
 #-------------------------------------------------------------------------------------------
 # b) Boosted trees
 library(adabag)
-# Aqui construimos inicialmente um modelo boosting com 1000 itera??es, profundidade 1
-# e minbucket 50, os pesos das ?rvores ser? dado pelo algortimo de Freund
+# Aqui construimos inicialmente um modelo boosting com 1000 iterações, profundidade 1
+# e minbucket 50, os pesos das árvores serão dados pelo algoritimo de Freund
 boost <- boosting(f_full, data= data.train, mfinal= 110, 
                   coeflearn = "Freund", 
                   control = rpart.control(minbucket= 5,maxdepth = 12))
 
-# Avaliando a evolu??o do erro conforme o n?mero de itera??es aumenta
+# Avaliando a evolução do erro conforme o número de iterações aumenta
 plot(errorevol(boost, data.train))
 
-# podemos manter em 200 itera??es
+# podemos manter em 200 iterações
 
-# Import?ncia das vari?veis
+# Importância das variáveis
 var_importance <- boost$importance[order(boost$importance,decreasing = T)]
 var_importance
 importanceplot(boost)
@@ -153,7 +153,7 @@ importanceplot(boost)
 boost.prob.train <- predict.boosting(boost, data.train)$prob[,2]
 boost.prob.test  <- predict.boosting(boost, data.test)$prob[,2]
 
-# Comportamento da saida do modelo
+# Comportamento da saída do modelo
 hist(boost.prob.test, breaks = 25, col = "lightblue",xlab= "Probabilidades",
      ylab= "Frequ?ncia",main= "Boosting")
 
@@ -162,7 +162,7 @@ boxplot(boost.prob.test ~ data.test$TenYearCHD,col= c("green", "red"), horizonta
 ################################################################################################
 # AVALIANDO A PERFORMANCE
 
-# Matricas de discrimina??o para ambos modelos
+# Métricas de discriminação para ambos modelos
 library(hmeasure) 
 
 rndfor.train  <- HMeasure(data.train$TenYearCHD,rndfor2.prob.train)
