@@ -176,21 +176,20 @@ boost.train$metrics
 boost.test$metrics
 
 library(pROC)
-roc1 <- roc(data.test$TenYearCHD,rndfor2.prob.test)
-y1 <- roc1$sensitivities
-x1 <- 1-roc1$specificities
+roc3 <- roc(data.test$TenYearCHD,rndfor2.prob.test)
+y3 <- roc3$sensitivities
+x3 <- 1-roc3$specificities
 
-roc2 <- roc(data.test$TenYearCHD,boost.prob.test)
-y2 <- roc2$sensitivities
-x2 <- 1-roc2$specificities
+roc4 <- roc(data.test$TenYearCHD,boost.prob.test)
+y4 <- roc4$sensitivities
+x4 <- 1-roc4$specificities
 
-
-plot(x1,y1, type="n",
+plot(x3,y3, type="n",
      xlab = "1 - Especificidade", 
      ylab= "Sensitividade")
-lines(x1, y1,lwd=3,lty=1, col="purple") 
-lines(x2, y2,lwd=3,lty=1, col="blue") 
-legend("topright", c('Random Forest',"Boosting"), lty=1, col=c("purple","blue"))
+lines(x3, y3,lwd=3,lty=1, col="pink") 
+lines(x4, y4,lwd=3,lty=1, col="blue") 
+legend("topright", c('Random Forest',"Boosting"), lty=1, col=c("pink","blue"))
 
 ################################################################################################
 ################################################################################################
