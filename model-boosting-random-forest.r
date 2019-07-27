@@ -1,16 +1,34 @@
 ################################################################################################
 #
 # MODELAGEM PREDITIVA - MBA Business Analytics e Big Data
+# Por: RICARDO REIS
 #
-# CASE AULA 5 - EMPLOYEE TURNOVER
+# CASE - FRAMINGHAM HEART STUDY
+#
+# male: 0 = Female; 1 = Male
+# age: Age at exam time.
+# education: 1 = Some High School; 2 = High School or GED; 3 = Some College or Vocational School; 4 = college
+# currentSmoker: 0 = nonsmoker; 1 = smoker
+# cigsPerDay: number of cigarettes smoked per day (estimated average)
+# BPMeds: 0 = Not on Blood Pressure medications; 1 = Is on Blood Pressure medications
+# prevalentStroke: AVC
+# prevalentHyp: Hipertensão
+# diabetes: 0 = No; 1 = Yes
+# totChol: Colesterol total mg/dL
+# sysBP: Pressão sistólica mmHg
+# diaBP: Pressão diastólica mmHg
+# BMI: Body Mass Index calculated as: Weight (kg) / Height(meter-squared)
+# heartRate: Beats/Min (Ventricular)
+# glucose: Glicemia mg/dL
+# TenYearCHD: Prever se o paciente vai ter doenças coronarianas em 10 anos
 #
 ################################################################################################
 # LENDO OS DADOS
 
-path <- "~/Downloads/"
+path <- "C:/Users/Ricardo/Documents/R-Projetos/FraminghamHeartStudy/"
 
-baseBRF <- read.csv(paste(path,"dataset-framingham-heart-study.csv",sep=""), 
-                 sep=",",header = T,stringsAsFactors = T)
+baseBRF <- read.csv(paste(path,"framingham.csv",sep=""), 
+                    sep=",",header = T,stringsAsFactors = T)
 
 ################################################################################################
 # ANALISANDO AS VARiÁVEIS DA BASE DE DADOS
@@ -193,4 +211,3 @@ legend("topright", c('Random Forest',"Boosting"), lty=1, col=c("pink","blue"))
 
 ################################################################################################
 ################################################################################################
-
