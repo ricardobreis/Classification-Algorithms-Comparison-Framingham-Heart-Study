@@ -21,5 +21,5 @@
 - glucose: Blood glucose mg/dL
 - TenYearCHD: Coronary heart disease in 10 years
 
-
-[Framingham Heart Study Dataset - Kaggle](https://www.kaggle.com/amanajmera1/framingham-heart-study-dataset)
+## Framingham Heart Study Dataset
+[https://www.kaggle.com/amanajmera1/framingham-heart-study-dataset](https://www.kaggle.com/amanajmera1/framingham-heart-study-dataset)
