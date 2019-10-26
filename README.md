@@ -21,6 +21,9 @@ The aim of this project is to study the database called Framingham Heart Study o
 - Glucose: Blood glucose mg/dL
 - TenYearCHD: Coronary heart disease in 10 years
 
+## Checking Missing Values
+![Missing Values](https://github.com/ricardobreis/Classification-Algorithms-Comparison-Framingham-Heart-Study/blob/master/missing-values.png)
+
 ## ROC Curves
 ![ROC Curves](https://github.com/ricardobreis/Classification-Algorithms-Comparison-Framingham-Heart-Study/blob/master/Roc-curves.png)
 
