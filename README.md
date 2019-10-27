@@ -59,15 +59,11 @@ Total Observations in Table:  1097
              | modelado  |           |           |
 -------------|-----------|-----------|-----------|
    observado |         0 |         1 | Row Total | 
--------------|-----------|-----------|-----------|
            0 |       738 |       201 |       939 | 
              |     0.786 |     0.214 |     0.856 | 
--------------|-----------|-----------|-----------|
            1 |        70 |        88 |       158 | 
              |     0.443 |     0.557 |     0.144 | 
--------------|-----------|-----------|-----------|
 Column Total |       808 |       289 |      1097 | 
--------------|-----------|-----------|-----------|
 
 ## Framingham Heart Study Dataset
 - [https://www.kaggle.com/amanajmera1/framingham-heart-study-dataset](https://www.kaggle.com/amanajmera1/framingham-heart-study-dataset)
