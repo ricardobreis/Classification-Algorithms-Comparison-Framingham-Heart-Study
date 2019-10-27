@@ -8,30 +8,33 @@ The aim of this project is to study the database called Framingham Heart Study o
 3. Random Forest
 4. Boosting
 
-## Features
-- Male: 0 = Female; 1 = Male
-- Age: Age at exam time.
-- Education: 1 = Some High School; 2 = High School or GED; 3 = Some College or Vocational School; 4 = college
-- CurrentSmoker: 0 = nonsmoker; 1 = smoker
-- CigsPerDay: number of cigarettes smoked per day (estimated average)
-- BPMeds: 0 = Not on Blood Pressure medications; 1 = Is on Blood Pressure medications
-- PrevalentStroke: AVC
-- PrevalentHyp: Hypertension
-- Diabetes: 0 = No; 1 = Yes
-- TotChol: Cholesterol total mg/dL
-- SysBP: Systolic pressure mmHg
-- DiaBP: Diastolic pressure mmHg
-- BMI: Body Mass Index calculated as: Weight (kg) / Height(meter-squared)
-- HeartRate: Beats/Min (Ventricular)
-- Glucose: Blood glucose mg/dL
-- TenYearCHD: Coronary heart disease in 10 years
+## Data Preparation
+The Framingham Heart Study sample is a set with 3.658 rows and 16 columns (15 independent variables and 1 dependent), and, to this study, it was divided into 2 datasets, a validation (with 2.561 observations) and test (with 1.097 observations) samples, a proportion of 70% and 30%.
 
-## Checking Missing Values
+### Features
+1. Male: 0 = Female; 1 = Male
+2. Age: Age at exam time.
+3. Education: 1 = Some High School; 2 = High School or GED; 3 = Some College or Vocational School; 4 = college
+4. CurrentSmoker: 0 = nonsmoker; 1 = smoker
+5. CigsPerDay: number of cigarettes smoked per day (estimated average)
+6. BPMeds: 0 = Not on Blood Pressure medications; 1 = Is on Blood Pressure medications
+7. PrevalentStroke: AVC
+8. PrevalentHyp: Hypertension
+9. Diabetes: 0 = No; 1 = Yes
+10. TotChol: Cholesterol total mg/dL
+11. SysBP: Systolic pressure mmHg
+12. DiaBP: Diastolic pressure mmHg
+13. BMI: Body Mass Index calculated as: Weight (kg) / Height(meter-squared)
+14. HeartRate: Beats/Min (Ventricular)
+15. Glucose: Blood glucose mg/dL
+16. TenYearCHD: Coronary heart disease in 10 years
+
+### Checking Missing Values
 As you can see we have several missing values, so I've chosen to take these rows off the dataset mostly because of the logistic regression algorithm, unlike tree based algorithms, this technique doesn't accept missing values.
 
 ![Missing Values](https://github.com/ricardobreis/Classification-Algorithms-Comparison-Framingham-Heart-Study/blob/master/missing-values.png)
 
-## Checking Multicollinearity
+### Checking Multicollinearity
 To check if exists multicollinearity in this dataset, I'm using the VIF (Variance Inflation Factor), which quantifies the severity of multicollinearity. According to Gareth James, Daniela Witten, Trevor Hastie and Robert Tibshirani in "An Introduction to Statistical Learning": 
 
 > "As a rule of thumb, a VIF value that exceeds 5 or 10 indicates a problematic amount of collinearity."
