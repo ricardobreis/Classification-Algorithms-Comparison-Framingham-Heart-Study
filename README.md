@@ -56,7 +56,8 @@ It was generated the confusion matrix for the logistic regression model with dif
 
 Total Observations in Table:  1097 
  
-             | modelado 
+             | modelado  |           |           |
+-------------|-----------|-----------|-----------|
    observado |         0 |         1 | Row Total | 
 -------------|-----------|-----------|-----------|
            0 |       738 |       201 |       939 | 
