@@ -27,7 +27,7 @@ The aim of this project is to study the database called Framingham Heart Study o
 - TenYearCHD: Coronary heart disease in 10 years
 
 ## Checking Missing Values
-As you can see we have several missing values, so I've chosen to take these features off the dataset mostly because of the logistic regression algorithm, unlike tree based algorithms, this technique doesn't accept missing values.
+As you can see we have several missing values, so I've chosen to take these rows off the dataset mostly because of the logistic regression algorithm, unlike tree based algorithms, this technique doesn't accept missing values.
 
 ![Missing Values](https://github.com/ricardobreis/Classification-Algorithms-Comparison-Framingham-Heart-Study/blob/master/missing-values.png)
 
@@ -40,8 +40,16 @@ Checking the VIF column on the image below, there is no multicollinearity in Fra
 
 ![Multicollinearity](https://github.com/ricardobreis/Classification-Algorithms-Comparison-Framingham-Heart-Study/blob/master/Multicollinearity.PNG)
 
-## ROC Curves
+## Best Model
 ![ROC Curves](https://github.com/ricardobreis/Classification-Algorithms-Comparison-Framingham-Heart-Study/blob/master/Roc-curves.png)
+
+Analyzing the ROC Curves picture above, the model that best explains the response variable is Logistic Regression. Using the Stepwise Method, we can obtain only the significant features (which means a very low p-value) that minimize the Akaike information criterion (AIC), as you can see below:
+
+![Stepwise](https://github.com/ricardobreis/Classification-Algorithms-Comparison-Framingham-Heart-Study/blob/master/stepwise.PNG)
+
+and it generated an equation with the following parameters:
+
+> Z = -8.374414 + 0.553255 * (male) + 0.057016 * (age) + 0.019111 * (cigsPerDay) + 0.019128 * (sysBP) + 0.008241 * (glucose)
 
 ## Framingham Heart Study Dataset
 - [https://www.kaggle.com/amanajmera1/framingham-heart-study-dataset](https://www.kaggle.com/amanajmera1/framingham-heart-study-dataset)
