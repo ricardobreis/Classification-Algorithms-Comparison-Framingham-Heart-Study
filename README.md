@@ -1,7 +1,12 @@
 # Classification-Algorithms-Comparison-Framingham-Heart-Study
 
 ## A Brief Explanation
-The aim of this project is to study the database called Framingham Heart Study on people who have suffered a coronary heart disease or not in the last ten years and to develop a predictive model that allows us, with a good degree of generalization, to identify and predict which patients are most likely to have coronary problems.
+The aim of this project is to study the database called Framingham Heart Study on people who have suffered a coronary heart disease or not in the last ten years and to develop a predictive model that allows us, with a good degree of generalization, to identify and predict which patients are most likely to have coronary problems. To this study, it will be used:
+
+1. Logistic Regression
+2. Decision Tree
+3. Random Forest
+4. Boosting
 
 ## Features
 - Male: 0 = Female; 1 = Male
@@ -22,6 +27,8 @@ The aim of this project is to study the database called Framingham Heart Study o
 - TenYearCHD: Coronary heart disease in 10 years
 
 ## Checking Missing Values
+As you can see we have several missing values, so I've chosen to take these features off the dataset mostly because of the logistic regression algorithm, unlike tree based algorithms, this technique doesn't accept missing values.
+
 ![Missing Values](https://github.com/ricardobreis/Classification-Algorithms-Comparison-Framingham-Heart-Study/blob/master/missing-values.png)
 
 ## ROC Curves
