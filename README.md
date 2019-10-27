@@ -54,16 +54,7 @@ and it generated an equation with the following parameters:
 ### Confusion Matrix
 It was generated the confusion matrix for the logistic regression model with different cutoff points, and 20% is the cutoff point that has the highest number of hits in patients who will suffer heart disease without losing much accuracy in the hits of patients who will not suffer the disease. A cutoff above 20% decreases the hits of patients who will have the disease despite increasing the hits of patients who will not have the disease. As the objective of this study is to identify patients at risk for the disease, we conclude that 20% is the best fit cutoff level.
 
-Total Observations in Table:  1097 
- 
-             | modelado  |           |           |
--------------|-----------|-----------|-----------|
-   observado |         0 |         1 | Row Total | 
-           0 |       738 |       201 |       939 | 
-             |     0.786 |     0.214 |     0.856 | 
-           1 |        70 |        88 |       158 | 
-             |     0.443 |     0.557 |     0.144 | 
-Column Total |       808 |       289 |      1097 | 
+![Confusion Matrix](https://github.com/ricardobreis/Classification-Algorithms-Comparison-Framingham-Heart-Study/blob/master/confusion-matrix.PNG)
 
 ## Framingham Heart Study Dataset
 - [https://www.kaggle.com/amanajmera1/framingham-heart-study-dataset](https://www.kaggle.com/amanajmera1/framingham-heart-study-dataset)
