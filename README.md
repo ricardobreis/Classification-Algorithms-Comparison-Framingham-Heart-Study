@@ -31,6 +31,15 @@ As you can see we have several missing values, so I've chosen to take these feat
 
 ![Missing Values](https://github.com/ricardobreis/Classification-Algorithms-Comparison-Framingham-Heart-Study/blob/master/missing-values.png)
 
+## Checking Multicollinearity
+To check if exists multicollinearity in this dataset, I'm using the VIF (Variance Inflation Factor), which quantifies the severity of multicollinearity. According to Gareth James, Daniela Witten, Trevor Hastie and Robert Tibshirani in "An Introduction to Statistical Learning": 
+
+> "As a rule of thumb, a VIF value that exceeds 5 or 10 indicates a problematic amount of collinearity."
+
+Checking the VIF column on the image below, there is no multicollinearity in Framingham Heart Study dataset.
+
+![Multicollinearity](https://github.com/ricardobreis/Classification-Algorithms-Comparison-Framingham-Heart-Study/blob/master/Multicollinearity.PNG)
+
 ## ROC Curves
 ![ROC Curves](https://github.com/ricardobreis/Classification-Algorithms-Comparison-Framingham-Heart-Study/blob/master/Roc-curves.png)
 
