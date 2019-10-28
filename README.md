@@ -9,7 +9,7 @@ The aim of this project is to study the database called Framingham Heart Study o
 4. Boosting
 
 ## Data Preparation
-The Framingham Heart Study sample is a set with 3.658 rows and 16 columns (15 independent variables and 1 dependent), and, to this study, it was divided into 2 datasets, a validation (with 2.561 observations) and test (with 1.097 observations) samples, a proportion of 70% and 30%.
+The Framingham Heart Study sample is a set with 4240 rows and 16 columns (15 independent variables and 1 dependent).
 
 ### Features
 1. Male: 0 = Female; 1 = Male
@@ -42,6 +42,9 @@ To check if exists multicollinearity in this dataset, I'm using the VIF (Varianc
 Checking the VIF column on the image below, there is no multicollinearity in Framingham Heart Study dataset.
 
 ![Multicollinearity](https://github.com/ricardobreis/Classification-Algorithms-Comparison-Framingham-Heart-Study/blob/master/Multicollinearity.PNG)
+
+## Partitioning
+After the preparation, the dataset was reduced to 3658 rows and, to this study, it was divided into 2 datasets, a validation (with 2.561 observations) and test (with 1.097 observations) samples, a proportion of 70% and 30%.
 
 ## Best Model
 ![ROC Curves](https://github.com/ricardobreis/Classification-Algorithms-Comparison-Framingham-Heart-Study/blob/master/Roc-curves.png)
